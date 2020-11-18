@@ -102,8 +102,8 @@ console.log("LAST -> ", last(list1));
 console.log("LAST -> ", last(list2));
 //Otras implementaciones
 var last2 = function (collection) { return collection.slice(collection.length - 1)[0]; };
-console.log("LAST -> ", last2(list1));
-console.log("LAST -> ", last2(list2));
+console.log("LAST2 -> ", last2(list1));
+console.log("LAST2 -> ", last2(list2));
 var last3 = function (collection) {
     return collection.reduce(function (acum, elem, index, lista) {
         if (index === lista.length - 1) {
@@ -112,14 +112,15 @@ var last3 = function (collection) {
         return acum;
     }, undefined);
 };
-console.log("LAST -> ", last3(list1));
-console.log("LAST -> ", last3(list2));
+console.log("LAST3 -> ", last3(list1));
+console.log("LAST3 -> ", last3(list2));
 //*************************************************************************************************************************
 // concat
 //*************************************************************************************************************************
 console.log("***************************** C O N C A T *****************************************");
 var concat = function (collection1, collection2) { return __spreadArrays(collection1, collection2); };
 console.log("CONCAT -> ", concat(list1, list3));
+console.log("CONCAT -> ", concat(list1, list2));
 //*************************************************************************************************************************
 // concat
 //*************************************************************************************************************************
@@ -160,6 +161,7 @@ function clone(source) {
 var a = { name: "Maria", surname: "Ibañez", country: "SPA" };
 var b = clone(a);
 console.log("CLONE -> ", b);
+console.log("a === b -> ", a === b);
 //*************************************************************************************************************************
 // merge
 //*************************************************************************************************************************
@@ -216,8 +218,8 @@ var SlotMachine = /** @class */ (function () {
         this.coins = 0;
     }
     SlotMachine.prototype.play = function () {
-        var combination = __spreadArrays(this.generateShot());
         this.coins++;
+        var combination = __spreadArrays(this.generateShot());
         if (combination.every(function (oneShot) { return oneShot; })) {
             console.log("Congratulations!!!. You won " + this.coins + " coin" + (this.coins > 1 ? 's' : '') + "!!");
             this.coins = 0;

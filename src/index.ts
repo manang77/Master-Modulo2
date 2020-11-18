@@ -1,5 +1,17 @@
-const list1 = ["spanish", "english", "french", "german", "italian"];
-const list2 = [
+interface location {
+  id: number;
+  city: string;
+}
+
+interface person {
+  id: number;
+  name: string;
+  location: location;
+}
+
+
+const list1: string[] = ["spanish", "english", "french", "german", "italian"];
+const list2: person[] = [
   {
     id: 1,
     name: "Manuel",
@@ -33,9 +45,9 @@ const list2 = [
     }
   }
 ]
-const list3 = ["greek", "polish", "finish"];
-const list4 = ["russian", "swedish", "portuguese", "bulgarian"];
-const list5 = ["swiss"];
+const list3: string[] = ["greek", "polish", "finish"];
+const list4: string[] = ["russian", "swedish", "portuguese", "bulgarian"];
+const list5: string[] = ["swiss"];
 
 //*************************************************************************************************************************
 // head
@@ -94,9 +106,8 @@ console.log("LAST -> ", last(list2));
 
 //Otras implementaciones
 const last2 = (collection: any[]): any => collection.slice(collection.length - 1)[0];
-console.log("LAST -> ", last2(list1));
-console.log("LAST -> ", last2(list2));
-
+console.log("LAST2 -> ", last2(list1));
+console.log("LAST2 -> ", last2(list2));
 
 const last3 = (collection: any[]): any =>
   collection.reduce((acum: any, elem: any, index: number, lista: any[]) => {
@@ -105,8 +116,8 @@ const last3 = (collection: any[]): any =>
     }
     return acum;
   }, undefined);
-console.log("LAST -> ", last3(list1));
-console.log("LAST -> ", last3(list2));
+console.log("LAST3 -> ", last3(list1));
+console.log("LAST3 -> ", last3(list2));
 
 //*************************************************************************************************************************
 // concat
@@ -115,6 +126,7 @@ console.log("***************************** C O N C A T *************************
 
 const concat = (collection1: any[], collection2: any[]) => [...collection1, ...collection2];
 console.log("CONCAT -> ", concat(list1, list3));
+console.log("CONCAT -> ", concat(list1, list2));
 
 //*************************************************************************************************************************
 // concat
@@ -152,6 +164,7 @@ function clone<T>(source: T): T {
 const a = { name: "Maria", surname: "Ibañez", country: "SPA" };
 const b = clone(a);
 console.log("CLONE -> ", b);
+console.log("a === b -> ", a === b);
 
 //*************************************************************************************************************************
 // merge
@@ -227,8 +240,8 @@ class SlotMachine {
   }
 
   play() {
-    let combination = [...this.generateShot()];
     this.coins++;
+    let combination: boolean[] = [...this.generateShot()];
     if (combination.every(oneShot => oneShot)) {
       console.log(`Congratulations!!!. You won ${this.coins} coin${this.coins > 1 ? 's' : ''}!!`);
       this.coins = 0;
@@ -237,11 +250,11 @@ class SlotMachine {
     }
   }
 
-  generateShot() {
+  generateShot(): boolean[] {
     return [this.shot(), this.shot(), this.shot()];
   }
 
-  shot() {
+  shot(): boolean {
     return Boolean(Math.floor(Math.random() * 2))
   }
 }
